@@ -1,0 +1,39 @@
+﻿@page "/counter"
+@inject DesafioWPF.Data.AppDbContext DB
+@using Models
+@using MudBlazor
+@if (DB.Pedidos == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<MudContainer Class="mt-4 px-8" MaxWidth="MaxWidth.False" Style="background-color:#fafafa;">
+		<MudGrid>
+			<MudToggleGroup T="string" SelectionMode="SelectionMode.SingleSelection" @bind-Value="_value1" Color="Color.Primary" CheckMark FixedContent>
+				<MudToggleItem Value="@("Yes")" Text="Yes" />
+				<MudToggleItem Value="@("No")" Text="No" />
+				<MudToggleItem Value="@("Don't know")" Text="Don't know" />
+			</MudToggleGroup>
+			<DxGrid class="shadow rounded"
+					Data="DB.Pedidos"
+					ShowGroupPanel="true"
+					ShowFilterRow="true"
+					TextWrapEnabled="false"
+					AutoExpandAllGroupRows="true"
+					PagerNavigationMode="PagerNavigationMode.InputBox"
+					PageSizeSelectorVisible="true"
+					PageSizeSelectorAllRowsItemVisible="true"
+					AllowSort="true"
+					PageSizeSelectorItems="@(new int[] { 5,10,20 })"
+					ShowSearchBox="true">
+				<Columns>
+					<DxGridDataColumn FieldName="CodigoPedidos" Caption="Código" MinWidth="100" CaptionAlignment="GridTextAlignment.Center"></DxGridDataColumn>
+					<DxGridDataColumn FieldName="Descricao" Caption="Descrição" MinWidth="220" CaptionAlignment="GridTextAlignment.Center" AllowGroup="true">
+					</DxGridDataColumn>
+					<DxGridDataColumn FieldName="Valor" Caption="Preço" DisplayFormat="R$ #" MinWidth="220" CaptionAlignment="GridTextAlignment.Center" AllowGroup="false" />
+				</Columns>
+			</DxGrid>
+		</MudGrid>
+	</MudContainer>
+}

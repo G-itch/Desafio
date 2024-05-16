@@ -1,0 +1,71 @@
+﻿@page "/Cadastro"
+@using MudBlazor
+@inherits LayoutComponentBase
+
+<MudContainer Class="mt-4 px-8" MaxWidth="MaxWidth.False" Style="background-color:#fafafa;">
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField Label="Nome" Variant="Variant.Text" @bind-Value="firstName" FullWidth Margin="Margin.Dense" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.People" AdornmentColor="Color.Primary" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+             <MudTextField Label="Sobrenome" Variant="Variant.Text" @bind-Value="lastName" FullWidth Margin="Margin.Dense" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.People" AdornmentColor="Color.Primary" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+             <MudTextField Label="Email" Variant="Variant.Text" @bind-Value="email" FullWidth Margin="Margin.Dense" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" AdornmentColor="Color.Primary" />
+        </MudItem>
+@*         <MudItem xs="12" sm="6" md="4">
+            <MudSelect T="string" Label="Country" @bind-Value="selectedCountry" Variant="Variant.Filled">
+                <MudSelectItem Value="USA">USA</MudSelectItem>
+                <MudSelectItem Value="Canada">Canada</MudSelectItem>
+                <MudSelectItem Value="UK">United Kingdom</MudSelectItem>
+            </MudSelect>
+        </MudItem> *@
+        <MudItem xs="12" sm="6" md="4">
+             <MudDatePicker Label="Data de nascimento" @bind-Date="dob" Variant="Variant.Text" Margin="Margin.Dense"  FullWidth />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudSlider Label="Satisfaction" Min="0" Max="10" Step="1" @bind-Value="satisfactionLevel" Variant="Variant.Filled" FullWidth >Satisfação</MudSlider>
+        </MudItem>
+         <MudSelect  T="string" Label="Tipo" Variant="Variant.Text">
+             <MudSelectItem Value="@("Orçamento")" />
+             <MudSelectItem Value="@("Em Aberto")" />
+             <MudSelectItem Value="@("Em produção")" />
+             <MudSelectItem Value="@("Fechado")" />
+         </MudSelect>
+@*         <MudItem xs="12">
+            <MudRadioGroup T="string" Label="Subscription Plan" @bind-SelectedOption="selectedPlan">
+                <MudRadio Value="Basic" Label="Basic" />
+                 <MudRadio Value="Premium" Label="Premium" />
+                 <MudRadio Value="VIP" Label="VIP" />
+            </MudRadioGroup>
+        </MudItem> *@
+
+    </MudGrid>
+
+    <MudContainer Class="pa-4 align-content-center align-center" Style="display: flex; justify-content:center ">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@Submit">Submit</MudButton>
+    </MudContainer>
+</MudContainer>
+
+ @code {
+    private string firstName;
+    private string lastName;
+    private string email;
+    private string selectedCountry;
+    private DateTime? dob;
+    private int satisfactionLevel;
+    private string selectedPlan;
+    private bool termsAccepted;
+    private bool Basic;
+    private bool Premium;
+    private bool VIP;
+    private bool USA;
+    private bool Canada;
+    private bool UK;
+    private void Submit()
+    {
+        // Handle the submit action here
+        Console.WriteLine($"First Name: {firstName}, Last Name: {lastName}, Email: {email}");
+    }
+}
+

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +11,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DesafioWPF.Data;
 using Microsoft.Extensions.DependencyInjection;
+using DesafioWPF.Services;
+using Microsoft.EntityFrameworkCore;
+using MudBlazor.Services;
 namespace DesafioWPF
 {
 	/// <summary>
@@ -26,6 +30,10 @@ namespace DesafioWPF
 			serviceCollection.AddBlazorWebViewDeveloperTools();
 #endif
             serviceCollection.AddSingleton<WeatherForecastService>();
+            serviceCollection.AddTransient<IApplicationRunner, WindowsApplicationRunner>();
+            serviceCollection.AddDbContext<AppDbContext>(x => { x.UseInMemoryDatabase("app"); });
+			serviceCollection.AddMudServices();
+            serviceCollection.AddDevExpressBlazor(configure => configure.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5);
             Resources.Add("services", serviceCollection.BuildServiceProvider());
         }
 	}

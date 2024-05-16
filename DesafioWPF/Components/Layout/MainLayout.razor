@@ -1,0 +1,111 @@
+﻿@using MudBlazor
+@inherits LayoutComponentBase
+<MudThemeProvider Theme="_currentTheme"  />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<div class="page">
+	<main>
+		<MudLayout>
+			<MudAppBar Elevation="0" Color="Color.Secondary" Class="shadow">
+				@* <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" /> *@
+				<MudContainer>
+					<MudText Typo="Typo.h5" Color="Color.Primary" Style="font-weight: bold;">Empresa</MudText>
+				</MudContainer>
+				<MudSpacer />
+				@* 				<MudToolBar>
+				<MudMenu Label="Atalhos">
+				<MudMenuItem>Enlist</MudMenuItem>
+				<MudMenuItem>Barracks</MudMenuItem>
+				<MudMenuItem>Armory</MudMenuItem>
+				</MudMenu>
+				<MudButton Color="Color.Primary" Size="Size.Large">Cadastros</MudButton>
+				<MudButton Color="Color.Primary">Movimentos</MudButton>
+				<MudButton Color="Color.Primary">Consultas</MudButton>
+				<MudButton Color="Color.Primary">Relatórios</MudButton>
+				</MudToolBar> *@
+				<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+					<MudTextField @bind-Value="TextValue" Label="Pesquisar" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentIcon="@Icons.Material.Filled.Search" Adornment="Adornment.End" AdornmentColor="Color.Primary"></MudTextField>
+					@* 					<MudBadge Content="3" Overlap="true" Class="mx-3 my-4"  Color="Color.Primary">
+					<MudIcon Icon="@Icons.Material.Filled.Notifications" Color="Color.Primary" />
+					</MudBadge> *@
+					@* 					<MudStack Spacing="0" AlignItems="AlignItems.Center">
+					<MudText Typo="Typo.body2" Style="font-weight: bold; color: #363636; font-size: 13px;">
+					Steverson
+					</MudText style:>
+					<MudText Typo="Typo.body2" Style="color: #363636; font-size: 12px;">
+					Analista
+					</MudText>
+					</MudStack> *@
+					@* 					<MudBadge Overlap="true" Class="mx-2 my-4" Origin="Origin.BottomRight" Color="Color.Success" Dot="true">
+					<MudAvatar Color="Color.Primary">S</MudAvatar>
+					</MudBadge> *@
+				</MudStack>
+			</MudAppBar>
+			<MudDrawer Open="true" Elevation="1" Color="Color.Primary" Variant="@DrawerVariant.Persistent" style="scrollbar-width: none;" Width="300px">
+				@* <MudDrawerHeader Class="text-center shadow" Style="background-color: #FCFFFFFF"> *@
+				@* 					<MudContainer>
+				<MudText Typo="Typo.h5" Color="Color.Primary" Align="Align.Center" Class="mt-1" Style="font-weight: bold;" hidden="@(!_drawerOpen)">TidSoftware</MudText>
+				</MudContainer> *@
+				@* </MudDrawerHeader> *@
+				@*                 <MudContainer>
+				<MudTextField @bind-Value="Pesquisa" Style="height: 40px;" Label="Pesquisar" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" Adornment="Adornment.End" ></MudTextField>
+				<MudAutocomplete></MudAutocomplete>
+				</MudContainer> *@
+				<NavMenu />
+			</MudDrawer>
+			<MudMainContent Style="height: 100 %;">
+				<MudBreadcrumbs Items="_items" Class="px-6"></MudBreadcrumbs>
+				@Body
+			</MudMainContent>
+
+		</MudLayout>
+
+
+
+
+
+		@code {
+			bool _drawerOpen = true;
+			public string? Pesquisa { get; set; }
+			public string TextValue { get; set; }
+			bool _isDarkMode = true;
+			private readonly MudTheme _currentTheme = new()
+		{
+			Palette = new PaletteLight
+			{
+				Primary = "#B60A0A",
+				Secondary = "#FCFFFFFF",
+				Info = "#64a7e2",
+				Success = "#2ECC40",
+				Warning = "#FFC107",
+				Error = "#FF0000",
+				AppbarBackground = "#B60A0A",
+				TextPrimary = "#3B3B3B",
+				TextSecondary = "#303030",
+				// more color properties
+			},
+			PaletteDark = new PaletteDark
+			{
+				Primary = "#B60A0A",
+				Secondary = "#FC181818",
+				Info = "#64a7e2",
+				Success = "#2ECC40",
+				Warning = "#FFC107",
+				Error = "#FF0000",
+				AppbarBackground = "#B60A0A",
+				TextPrimary = "#F4F4F4",
+				TextSecondary = "#2E2E2E",
+			}
+		};
+
+			private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+		{
+		new BreadcrumbItem("Principal", href: "/", icon: Icons.Material.Filled.Menu)
+		};
+			void DrawerToggle()
+			{
+				_drawerOpen = !_drawerOpen;
+			}
+		}
+	</main>
+</div>

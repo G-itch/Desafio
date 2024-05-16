@@ -1,0 +1,60 @@
+﻿@using MudBlazor
+@inject IApplicationRunner ApplicationRunner
+<input type="checkbox" title="Navigation menu" Class="navbar-toggler" />
+
+<MudNavMenu Color="Color.Secondary" Class="mt-1">
+	<MudNavGroup Icon="@Icons.Material.Filled.DensityMedium" IconColor="Color.Inherit" Title="Atalhos" Expanded="true">
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShoppingBag" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\PEDVENDA.EXE 00001003")'>Pedido de Venda</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Inventory" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\CONTREST.EXE 00001003")'>Controle de Estoque</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AttachMoney" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\TABPRE.EXE 00001003")'>Tabela de Preços</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Outbox" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\VDBALCAO.EXE 00001003")'>Balcão de Vendas</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ManageSearch" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\ESTBARRA.EXE 00001003")'>Cadastro e Consulta de Código de Barras</MudNavLink>
+	</MudNavGroup>
+	<MudNavGroup Icon="@Icons.Material.Filled.Archive" IconColor="Color.Inherit" Title="Arquivo">
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.NewLabel" IconColor="Color.Inherit">Consulta Parâmetros Novos</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Favorite" IconColor="Color.Inherit">Adicionar aos Favoritos</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Print" IconColor="Color.Inherit">Configurar impressora</MudNavLink>
+	</MudNavGroup>
+	<MudNavGroup Icon="@Icons.Material.Filled.Add" IconColor="Color.Inherit" Title="Cadastros">
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Payments" IconColor="Color.Inherit">Condições de Pagamento</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TripOrigin" IconColor="Color.Inherit">Origem Pedido</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.OfflinePin" IconColor="Color.Inherit">Motivos Perda Orçamento</MudNavLink>
+	</MudNavGroup>
+	<MudNavGroup Icon="@Icons.Material.Filled.Moving" IconColor="Color.Inherit" Title="Movimentos">
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShoppingBag" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\PEDVENDA.EXE 00001003")'>Pedidos</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.PriceChange" IconColor="Color.Inherit" @onclick='() => Executar("T:\\TIDSCI\\EXETPS\\TABPRE.EXE 00001003")'>Tabela de Preços</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ManageHistory" IconColor="Color.Inherit">Altera Orçamentos no Período</MudNavLink>
+	</MudNavGroup>
+	<MudNavGroup Icon="@Icons.Material.Filled.Search" IconColor="Color.Inherit" Title="Consultas">
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.PriceChange" IconColor="Color.Inherit">Preço dos Materiais</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Inventory" IconColor="Color.Inherit">Estoque/Preço</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.History" IconColor="Color.Inherit">Histórico do Material</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Key" IconColor="Color.Inherit">Materiais para Chave Externa</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ScreenSearchDesktop" IconColor="Color.Inherit">Pedidos de Venda</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ManageSearch" IconColor="Color.Inherit">Material com Leitor de Código de Barras</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ControlPoint" IconColor="Color.Inherit">Posição do Estoque Pedidos em Aberto</MudNavLink>
+	</MudNavGroup>
+	<MudNavGroup Icon="@Icons.Material.Filled.Description" IconColor="Color.Inherit" Title="Relatórios">
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.RequestPage" IconColor="Color.Inherit">Pedidos em Aberto</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CalendarToday" IconColor="Color.Inherit">Pedidos no Período</MudNavLink>
+		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Info" IconColor="Color.Inherit">Relatórios Específicos</MudNavLink>
+	</MudNavGroup>
+@* 	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Menu" IconColor="Color.Inherit" Href="/">Menu</MudNavLink>
+	<MudDivider Style="background-color: white" />
+	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add" IconColor="Color.Inherit" Href="/Cadastro">Cadastros</MudNavLink>
+	<MudDivider Style="background-color: white" />
+	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShoppingBag" IconColor="Color.Inherit" Href="/Counter">Pedidos</MudNavLink>
+	<MudDivider Style="background-color: white" />
+	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Moving" IconColor="Color.Inherit" Href="/Weather">Movimentos</MudNavLink>
+	<MudDivider Style="background-color: white" />
+
+	<MudDivider Style="background-color: white" />
+	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.DensityMedium" IconColor="Color.Inherit" Href="/Weather">Atalhos</MudNavLink> *@
+</MudNavMenu>
+
+@code {
+	private void Executar(string path)
+	{
+		ApplicationRunner.RunApplication(path);
+	}
+	}

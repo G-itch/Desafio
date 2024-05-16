@@ -1,0 +1,355 @@
+﻿@page "/"
+@using DevExpress.Data.Filtering
+@using DevExpress.Data.Linq
+@using MudBlazor
+@using Heron.MudCalendar
+@inherits LayoutComponentBase
+@using System.Drawing
+@using System.Linq.Expressions
+@using DesafioWPF.Components.NovaPasta1
+<Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromMilliseconds(1400)" DelayMilliseconds="400" >
+	<MudContainer Class="mt-4 px-6" MaxWidth="MaxWidth.False" Style="height: 100%;">
+	<MudGrid>
+		<MudItem Style="width: 100%;">
+@* 			<TopCards /> *@
+		<MudGrid Style="display: flex; align-items:stretch">
+				<MudItem xs="12" sm="6" md="4" lg="4" xl="2">
+
+					<MudPaper Elevation="1" Class="pa-4">
+						<div style="display: flex; align-items: center; gap:4px">
+							<MudAvatar Style="background-color:whitesmoke;">
+								<MudIcon Icon="@Icons.Material.Rounded.TrendingUp" Color="MudBlazor.Color.Primary" />
+							</MudAvatar>
+							<div style="align-items: center; gap:4px" class="ms-lg-4">
+								<MudText Typo="Typo.body2" Style="color:lightgray">Valor Total Em Aberto</MudText>
+									<MudText Typo="Typo.h6" Style="font-weight: bold" Color="MudBlazor.Color.Primary">R$ @selectedforecasts.AsQueryable().Where(x => x.Summary == "Em Aberto").Sum(x => x.TemperatureF).ToString("F2")</MudText>
+							</div>
+						</div>
+					</MudPaper>
+
+				</MudItem>
+				<MudItem xs="12" sm="6" md="4" lg="4" xl="2">
+					<MudPaper Elevation="1" Class="pa-4" Style="height: 100%;">
+						<div style="display: flex; align-items: center; gap:4px">
+							<MudAvatar Style="background-color:whitesmoke;">
+								<MudIcon Icon="@Icons.Material.Rounded.ReceiptLong" Color="MudBlazor.Color.Primary" />
+							</MudAvatar>
+							<div style="align-items: center; gap:4px" class="ms-lg-4">
+								<MudText Typo="Typo.body2" Style="color:lightgray">Pedidos Em Aberto</MudText>
+									<MudText Typo="Typo.h6" Style="font-weight: bold" Color="MudBlazor.Color.Primary">@selectedforecasts.AsQueryable().Where(x => x.Summary == "Em Aberto").Count()</MudText>
+							</div>
+						</div>
+					</MudPaper>
+				</MudItem>
+				<MudItem xs="12" sm="6" md="4" lg="4" xl="2">
+					<MudPaper Elevation="1" Class="pa-4" Style="height: 100%;">
+						<div style="display: flex; align-items: center; gap:4px">
+							<MudAvatar Style="background-color:whitesmoke">
+								<MudIcon Icon="@Icons.Material.Rounded.AttachMoney" Color="MudBlazor.Color.Primary" />
+							</MudAvatar>
+							<div style="align-items: center; gap:4px" class="ms-lg-4">
+								<MudText Typo="Typo.body2" Style="color:lightgray">Comissão</MudText>
+									<MudText Typo="Typo.h6" Style="font-weight: bold" Color="MudBlazor.Color.Primary">R$ @selectedforecasts.AsQueryable().Sum(x => x.TemperatureF * 0.05).ToString("F2") </MudText>
+							</div>
+						</div>
+					</MudPaper>
+				</MudItem>
+				<MudItem xs="12" sm="6" md="4" lg="4" xl="2">
+					<MudPaper Elevation="1" Class="pa-4" Style="height: 100%;">
+						<div style="display: flex; align-items: center; gap:4px">
+							<MudAvatar Style="background-color:whitesmoke;">
+								<MudIcon Icon="@Icons.Material.Rounded.Sell" Color="MudBlazor.Color.Primary" />
+							</MudAvatar>
+							<div style="align-items: center; gap:4px" class="ms-lg-4">
+								<MudText Typo="Typo.body2" Style="color:lightgray">Valor Total IPI</MudText>
+									<MudText Typo="Typo.h6" Style="font-weight: bold" Color="MudBlazor.Color.Primary">R$ @selectedforecasts.AsQueryable().Sum(x => x.TemperatureF * 0.12).ToString("F2")</MudText>
+							</div>
+						</div>
+					</MudPaper>
+				</MudItem>
+				<MudItem xs="12" sm="6" md="4" lg="4" xl="2">
+					<MudPaper Elevation="1" Class="pa-4" Style="height: 100%;">
+						<div style="display: flex; align-items: center; gap:4px">
+							<MudAvatar Style="background-color:whitesmoke;">
+								<MudIcon Icon="@Icons.Material.Rounded.ShoppingCart" Color="MudBlazor.Color.Primary" />
+							</MudAvatar>
+							<div style="align-items: center; gap:4px" class="ms-lg-4">
+								<MudText Typo="Typo.body2" Style="color:lightgray">Valor Total ICMS</MudText>
+									<MudText Typo="Typo.h6" Style="font-weight: bold" Color="MudBlazor.Color.Primary">R$ @selectedforecasts.AsQueryable().Sum(x => x.TemperatureF * 0.16).ToString("F2")</MudText>
+							</div>
+						</div>
+					</MudPaper>
+				</MudItem>
+				<MudItem xs="12" sm="6" md="4" lg="4" xl="2">
+					<MudPaper Elevation="1" Class="pa-4" Style="height: 100%;">
+						<div style="display: flex; align-items: center; gap:4px">
+							<MudAvatar Style="background-color:whitesmoke;">
+								<MudIcon Icon="@Icons.Material.Rounded.Storefront" Color="MudBlazor.Color.Primary" />
+							</MudAvatar>
+							<div style="align-items: center; gap:4px" class="ms-lg-4">
+								<MudText Typo="Typo.body2" Style="color:lightgray">Vendas Totais</MudText>
+								<MudText Typo="Typo.h6" Style="font-weight: bold" Color="MudBlazor.Color.Primary">@selectedforecasts.AsQueryable().Count()</MudText>
+							</div>
+						</div>
+					</MudPaper>
+				</MudItem>
+
+		</MudGrid>
+		</MudItem>
+			<MudItem md="12" lg="6" >
+				<Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromMilliseconds(1000)" DelayMilliseconds="400" style="display: flex;">
+					<DxGrid class="shadow rounded-circle"
+							Data="@forecasts"
+							ShowGroupPanel="true"
+							ShowFilterRow="true"
+							TextWrapEnabled="false"
+							AutoExpandAllGroupRows="true"
+							PagerNavigationMode="PagerNavigationMode.InputBox"
+							AllowSort="true"
+							ShowSearchBox="true"
+							FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+							PageSize="9"
+							CssClass="ch-480"
+							@ref="grid"
+							style="height: 534px;"
+						    FilterCriteriaChanged="@OnFilterChanged"
+							>
+							
+						<Columns>
+							<DxGridDataColumn FieldName="Date" GroupInterval="GridColumnGroupInterval.DateMonth" Caption="Data" CaptionAlignment="GridTextAlignment.Center" DisplayFormat="d" TextAlignment="GridTextAlignment.Center" >
+							</DxGridDataColumn>
+							<DxGridDataColumn FieldName="Descricao" Caption="Pedido" TextAlignment="GridTextAlignment.Center" CaptionAlignment="GridTextAlignment.Center" ></DxGridDataColumn>
+							<DxGridDataColumn FieldName="TemperatureC" Caption="Valor" AllowGroup="false" DisplayFormat="R$ {0:n2}" CaptionAlignment="GridTextAlignment.Center">
+
+							</DxGridDataColumn>
+							<DxGridDataColumn FieldName="Summary" Caption="Categoria" TextAlignment="GridTextAlignment.Center" CaptionAlignment="GridTextAlignment.Center" >
+								<CellDisplayTemplate>
+
+									<MudChip Size="MudBlazor.Size.Small" Label="true" Style="@($"background-color:{summariesdict[(context.DataItem as WeatherForecast).Summary]}66; color: {summariesdict[(context.DataItem as WeatherForecast).Summary]};font-weight: 500;")">@((context.DataItem as WeatherForecast).Summary)</MudChip>
+								</CellDisplayTemplate>
+							</DxGridDataColumn>
+						</Columns>
+					</DxGrid>
+				</Animate>
+			</MudItem>
+
+
+			    <MudItem sm="12" md="12" lg="6" Style="height: 100%;">
+				<MudPaper Elevation="1" Class="pa-4">
+					<MudStack>
+					<DxPieChart  T="WeatherForecast" Data="@selectedforecasts" Diameter="0.8" InnerDiameter="0.5" Height="255px" CustomizeSeriesPoint="@CustomizePoint">
+						<DxPieChartSeries T="WeatherForecast"
+										  TArgument="string"
+										  TValue="int"
+										  
+										  ValueField="WeatherForecast => 1"
+										  ArgumentField="WeatherForecast => WeatherForecast.Summary"
+											  SummaryMethod="Enumerable.Sum" >
+							<DxChartSeriesLabel Visible="true"
+												Position="RelativePosition.Outside"
+												ValueFormat="ChartElementFormat.Decimal(1)">
+								<DxChartSeriesLabelConnector Visible="true" />
+							</DxChartSeriesLabel>
+						</DxPieChartSeries>
+						<DxChartTooltip Enabled="true"
+										Position="RelativePosition.Outside">
+							<div style="margin: 0.75rem">
+								<div class="fw-bold" style="color: @context.Point.">@context.Point.Argument</div>
+								<div>Quantidade: @($"{context.Point.Value:#,0.}")</div>
+							</div>
+						</DxChartTooltip>
+							<DxChartLegend @ref="legend" HorizontalAlignment="DevExpress.Blazor.HorizontalAlignment.Center"
+									   VerticalAlignment="VerticalEdge.Bottom"
+									   Position="RelativePosition.Outside"
+									   Orientation="DevExpress.Blazor.Orientation.Horizontal"  Visible= "false" />
+					</DxPieChart>
+						<DxChart T="WeatherForecast" Data="@selectedforecasts" Height="230px">
+							<DxChartBarSeries TArgument="string" ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")' ValueField="WeatherForecast => WeatherForecast.TemperatureC" TValue="double" T="WeatherForecast" Name="Gastos" Color='System.Drawing.ColorTranslator.FromHtml("#CB0000")' SummaryMethod="Enumerable.Sum" />
+							<DxChartBarSeries TArgument="string" ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")' ValueField="WeatherForecast => WeatherForecast.TemperatureF" TValue="double" T="WeatherForecast" Name="Lucros" Color='System.Drawing.ColorTranslator.FromHtml("#28a544")' SummaryMethod="Enumerable.Sum" />
+								<DxChartTooltip Enabled="true"
+												Position="RelativePosition.Outside">
+									<div style="margin: 0.75rem">
+										<div class="fw-bold">@context.Point.Argument</div>
+										<div>@($"R$ {context.Point.Value:#,0.}")</div>
+									</div>
+								</DxChartTooltip>
+								<DxChartLegend HorizontalAlignment="DevExpress.Blazor.HorizontalAlignment.Center"
+											   VerticalAlignment="VerticalEdge.Bottom"
+											   Position="RelativePosition.Outside"
+											   Orientation="DevExpress.Blazor.Orientation.Horizontal" AllowToggleSeries="true"/>
+							</DxChart>
+							</MudStack>
+				</MudPaper>
+						
+			</MudItem>
+						    <MudItem sm="12" md="12" lg="6" Style="height: 100%;">
+								<MudPaper Elevation="1" Class="pa-4">
+					<DxChart T="WeatherForecast"
+							 Data="@selectedforecasts"
+							 Width="100%" CustomizeSeriesPoint="@CustomizePoint">
+						<DxChartTitle Text="Valor de vendas" >
+							<DxChartSubTitle Text="Distribuição de Categorias" />
+						</DxChartTitle>
+						<DxChartStackedBarSeries T="WeatherForecast"
+												 TArgument="string"
+												 TValue="double"
+												 ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")'
+												 Name="Em Aberto"
+												 ValueField="WeatherForecast => WeatherForecast.TemperatureF"
+												 SummaryMethod="Enumerable.Sum"
+												 Filter='WeatherForecast => WeatherForecast.Summary == "Em Aberto"' 
+												 Color='ColorTranslator.FromHtml(summariesdict["Em Aberto"])'/>
+						<DxChartStackedBarSeries T="WeatherForecast"
+												 TArgument="string"
+												 TValue="double"
+												 ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")'
+												 Name="Em Produção"
+												 ValueField="WeatherForecast => WeatherForecast.TemperatureF"
+												 SummaryMethod="Enumerable.Sum"
+												 Filter='WeatherForecast => WeatherForecast.Summary == "Em Produção"'
+												 Color='ColorTranslator.FromHtml(summariesdict["Em Produção"])' />
+						<DxChartStackedBarSeries T="WeatherForecast"
+												 TArgument="string"
+												 TValue="double"
+												 ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")'
+												 Name="Orçamento"
+												 ValueField="WeatherForecast => WeatherForecast.TemperatureF"
+												 SummaryMethod="Enumerable.Sum"
+												 Filter='WeatherForecast => WeatherForecast.Summary == "Orçamento"' 
+												 Color='ColorTranslator.FromHtml(summariesdict["Orçamento"])' />
+						<DxChartStackedBarSeries T="WeatherForecast"
+												 TArgument="string"
+												 TValue="double"
+												 ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")'
+												 Name="Fechado"
+												 ValueField="WeatherForecast => WeatherForecast.TemperatureF"
+												 SummaryMethod="Enumerable.Sum"
+												 Filter='WeatherForecast => WeatherForecast.Summary == "Fechado"'
+												 Color='ColorTranslator.FromHtml(summariesdict["Fechado"])' 
+												 />
+						<DxChartStackedBarSeries T="WeatherForecast"
+												 TArgument="string"
+												 TValue="double"
+												 ArgumentField='WeatherForecast => WeatherForecast.Date.ToString("MM/yyyy")'
+												 Name="Cancelado"
+												 ValueField="WeatherForecast => WeatherForecast.TemperatureF"
+												 SummaryMethod="Enumerable.Sum"
+												 Filter='WeatherForecast => WeatherForecast.Summary == "Cancelado"' 
+												 Color='ColorTranslator.FromHtml(summariesdict["Cancelado"])' />
+						<DxChartLegend Position="RelativePosition.Outside"
+									   HorizontalAlignment="DevExpress.Blazor.HorizontalAlignment.Center"
+									   VerticalAlignment="VerticalEdge.Bottom" AllowToggleSeries="true" />
+						<DxChartTooltip Enabled="true"
+										Position="RelativePosition.Outside">
+							<div style="margin: 0.75rem">
+								<div class="fw-bold">@context.Point.Argument</div>
+								<div>Categoria: @context.Point.SeriesName</div>
+								<div>Valor de vendas: R$ @($"{context.Point.Value:#,0.}")</div>
+							</div>
+						</DxChartTooltip>
+					</DxChart>
+								</MudPaper>
+							</MudItem>
+	</MudGrid>
+
+</MudContainer>
+</Animate>
+@code {
+	DxGrid grid;
+	DxPieChart<WeatherForecast> piechart;
+	DxChartLegend legend;
+	private string settings;
+	public string TextValue { get; set; }
+	private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+	public ChartOptions Options { get; set; } = new ChartOptions
+		{
+			XAxisLines = false,
+			YAxisLines = false,
+			DisableLegend = true,
+			LineStrokeWidth = 4,
+
+		};
+	public List<ChartSeries> Series = new List<ChartSeries>()
+	{
+		new ChartSeries() { Name = "United States", Data = new double[] { 40, 20, 25, 27, 46, 60, 48, 80, 15 } },
+	};
+	private WeatherForecast[]? forecasts;
+	private WeatherForecast[]? selectedforecasts;
+	private String[]? summaries;
+	Dictionary<string, string> summariesdict = new Dictionary<string, string>
+		{
+			{"Em Aberto","#28A544"},
+			{"Em Produção","#C0C300"},
+			{"Orçamento","#DC900C"},
+			{"Fechado","#1F0A98"},
+			{"Cancelado","#D41717"}
+		};
+	Dictionary<string, System.Drawing.Color> mainPalette = new Dictionary<string, System.Drawing.Color>
+		{
+			{"Em Aberto",System.Drawing.Color.FromArgb(255,40, 165, 68)},
+			{"Em Produção",System.Drawing.Color.FromArgb(255,192, 195, 0)},
+			{"Orçamento",System.Drawing.Color.FromArgb(255,220, 144, 12)},
+			{"Fechado",System.Drawing.Color.FromArgb(255,31, 10, 152)},
+			{"Cancelado",System.Drawing.Color.FromArgb(255,212, 23, 23)}
+		};
+	private List<string> priorityOrder = new List<string> { "Em Aberto", "Em Produção", "Orçamento", "Fechado", "Cancelado" };
+	protected override async Task OnInitializedAsync()
+	{
+		// Simulate asynchronous loading to demonstrate a loading indicator
+		// await Task.Delay(500);
+
+		var startDate = DateTime.Now;
+		summaries = new[] { "Em Aberto", "Em Produção", "Orçamento", "Fechado", "Cancelado" };
+		forecasts = Enumerable.Range(1, 500).Select(index => new WeatherForecast
+			{
+				Date = startDate.AddDays(index),
+				TemperatureC = Random.Shared.NextDouble() * 100,
+				Descricao = "Pedido " + index,
+				Summary = summaries[Random.Shared.Next(summaries.Length)]
+			}).ToArray();
+		selectedforecasts = forecasts;
+	}
+
+	private class WeatherForecast
+	{
+		public DateTime Date { get; set; }
+		public double TemperatureC { get; set; }
+		public string? Summary { get; set; }
+		public string? Descricao { get; set; }
+		public double TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+	}
+
+	private void CustomizePoint(ChartSeriesPointCustomizationSettings settings)
+	{
+		if (summariesdict.TryGetValue(settings.Point.Argument.ToString(), out var color))
+		{
+			settings.PointAppearance.Color = ColorTranslator.FromHtml(color);
+		}
+	}
+
+	public IQueryable<T> ApplyUserFilter<T>(IQueryable<T> source, CriteriaOperator criteria)
+	{
+		var converter = new CriteriaToExpressionConverter();
+		// The correct way to use Convert
+		var parameter = Expression.Parameter(typeof(T), "item");
+		var expression = converter.Convert(parameter, criteria);
+
+		// Creating the lambda expression
+		var lambda = Expression.Lambda<Func<T, bool>>(expression, parameter);
+
+		// Apply the expression as a filter
+		return source.Where(lambda);
+	}
+
+	private void OnFilterChanged(object newFilter)
+	{
+		if (grid.GetFilterCriteria()  != null) {
+			IQueryable<WeatherForecast> filteredQuery = ApplyUserFilter(forecasts.AsQueryable(), grid.GetFilterCriteria());
+			selectedforecasts = filteredQuery.ToArray();
+		} else
+		{
+			selectedforecasts = forecasts;
+		}
+	}
+
+}

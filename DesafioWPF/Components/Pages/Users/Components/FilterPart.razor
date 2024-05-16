@@ -1,0 +1,21 @@
+﻿@using MudBlazor
+@namespace FilterPart
+
+<MudItem xs="12" sm="4" md="4" lg="4" xl="2">
+    <MudPaper Elevation="1" Class="pa-4">
+        <div style="display: flex; align-items: safe center; gap:4px">
+            <div style="align-items: center; gap:4px" class="ms-lg-4">
+                <MudText Typo="Typo.h5" Style="color:lightgray">120</MudText>
+                <MudText Typo="Typo.h6" Style="font-weight: bold" Color="Color.Primary">Total de Clientes</MudText>
+            </div>
+            <MudAvatar Style="background-color:whitesmoke;">
+                <MudIcon Icon="@Icons.Material.Rounded.TrendingUp" Color="Color.Primary" />
+            </MudAvatar>
+        </div>
+    </MudPaper>
+</MudItem>
+@*<h3>@Descricao</h3> *@
+
+@code {
+	//[Parameter] public string Descricao { get; set; }
+}
