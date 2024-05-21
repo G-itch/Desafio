@@ -24,7 +24,7 @@
 				<MudButton Color="Color.Primary">Relatórios</MudButton>
 				</MudToolBar> *@
 				<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-					<MudTextField @bind-Value="TextValue" Label="Pesquisar" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentIcon="@Icons.Material.Filled.Search" Adornment="Adornment.End" AdornmentColor="Color.Primary"></MudTextField>
+					<MudTextField @bind-Value="filterText" Label="Pesquisar" Variant="Variant.Outlined" Margin="Margin.Dense" AdornmentIcon="@Icons.Material.Filled.Search" Adornment="Adornment.End" AdornmentColor="Color.Primary"></MudTextField>
 					@* 					<MudBadge Content="3" Overlap="true" Class="mx-3 my-4"  Color="Color.Primary">
 					<MudIcon Icon="@Icons.Material.Filled.Notifications" Color="Color.Primary" />
 					</MudBadge> *@
@@ -51,7 +51,9 @@
 				<MudTextField @bind-Value="Pesquisa" Style="height: 40px;" Label="Pesquisar" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" Adornment="Adornment.End" ></MudTextField>
 				<MudAutocomplete></MudAutocomplete>
 				</MudContainer> *@
-				<NavMenu />
+				<CascadingValue Value="@filterText">
+					<NavMenu />
+				</CascadingValue>
 			</MudDrawer>
 			<MudMainContent Style="height: 100 %;">
 				<MudBreadcrumbs Items="_items" Class="px-6"></MudBreadcrumbs>
@@ -65,6 +67,7 @@
 
 
 		@code {
+			private string filterText = "";
 			bool _drawerOpen = true;
 			public string? Pesquisa { get; set; }
 			public string TextValue { get; set; }

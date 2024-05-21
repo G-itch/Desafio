@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -18,10 +18,10 @@
     <PackageReference Include="Bogus" Version="35.5.1" />
     <PackageReference Include="DevExpress.Blazor" Version="23.2.3" />
     <PackageReference Include="Heron.MudCalendar" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="8.0.40" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="6.0.312" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.30" />
     <PackageReference Include="MudBlazor" Version="6.19.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>

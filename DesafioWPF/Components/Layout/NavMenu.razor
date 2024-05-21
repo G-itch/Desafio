@@ -1,4 +1,4 @@
-﻿@using MudBlazor
+﻿@* @using MudBlazor
 @inject IApplicationRunner ApplicationRunner
 <input type="checkbox" title="Navigation menu" Class="navbar-toggler" />
 
@@ -39,17 +39,6 @@
 		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CalendarToday" IconColor="Color.Inherit">Pedidos no Período</MudNavLink>
 		<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Info" IconColor="Color.Inherit">Relatórios Específicos</MudNavLink>
 	</MudNavGroup>
-@* 	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Menu" IconColor="Color.Inherit" Href="/">Menu</MudNavLink>
-	<MudDivider Style="background-color: white" />
-	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Add" IconColor="Color.Inherit" Href="/Cadastro">Cadastros</MudNavLink>
-	<MudDivider Style="background-color: white" />
-	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShoppingBag" IconColor="Color.Inherit" Href="/Counter">Pedidos</MudNavLink>
-	<MudDivider Style="background-color: white" />
-	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Moving" IconColor="Color.Inherit" Href="/Weather">Movimentos</MudNavLink>
-	<MudDivider Style="background-color: white" />
-
-	<MudDivider Style="background-color: white" />
-	<MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.DensityMedium" IconColor="Color.Inherit" Href="/Weather">Atalhos</MudNavLink> *@
 </MudNavMenu>
 
 @code {
@@ -57,4 +46,108 @@
 	{
 		ApplicationRunner.RunApplication(path);
 	}
-	}
+	} *@
+
+@using MudBlazor
+@inject IApplicationRunner ApplicationRunner
+
+<MudNavMenu Color="Color.Secondary" Class="mt-1">
+    @foreach (var group in navGroups)
+    {
+        var filteredLinks = group.Links.Where(link => link.DisplayName.Contains(FilterText, StringComparison.OrdinalIgnoreCase)).ToList();
+        if (filteredLinks.Any())
+        {
+            <MudNavGroup Icon="@group.Icon" IconColor="Color.Inherit" Title="@group.Title" Expanded="true">
+                @foreach (var link in filteredLinks)
+                {
+                    <MudNavLink Match="NavLinkMatch.All" Icon="@link.Icon" IconColor="Color.Inherit" @onclick="@(() => Executar(link.Path))">@link.DisplayName</MudNavLink>
+                }
+            </MudNavGroup>
+        }
+    }
+</MudNavMenu>
+
+
+@code {
+    [CascadingParameter]
+    public string FilterText { get; set; }
+
+       private List<NavGroup> navGroups = new List<NavGroup>
+    {
+        new NavGroup("Atalhos", Icons.Material.Filled.DensityMedium, new List<NavLink>
+        {
+            new NavLink("Pedido de Venda", Icons.Material.Filled.ShoppingBag, "T:\\TIDSCI\\EXETPS\\PEDVENDA.EXE 00001003"),
+            new NavLink("Controle de Estoque", Icons.Material.Filled.Inventory, "T:\\TIDSCI\\EXETPS\\CONTREST.EXE 00001003"),
+            new NavLink("Tabela de Preços", Icons.Material.Filled.AttachMoney, "T:\\TIDSCI\\EXETPS\\TABPRE.EXE 00001003"),
+            new NavLink("Balcão de Vendas", Icons.Material.Filled.Outbox, "T:\\TIDSCI\\EXETPS\\VDBALCAO.EXE 00001003"),
+            new NavLink("Cadastro e Consulta de Código de Barras", Icons.Material.Filled.ManageSearch, "T:\\TIDSCI\\EXETPS\\ESTBARRA.EXE 00001003")
+        }),
+        new NavGroup("Arquivo", Icons.Material.Filled.Archive, new List<NavLink>
+        {
+            new NavLink("Consulta Parâmetros Novos", Icons.Material.Filled.NewLabel),
+            new NavLink("Adicionar aos Favoritos", Icons.Material.Filled.Favorite),
+            new NavLink("Configurar impressora", Icons.Material.Filled.Print)
+        }),
+        new NavGroup("Cadastros", Icons.Material.Filled.Add, new List<NavLink>
+        {
+            new NavLink("Condições de Pagamento", Icons.Material.Filled.Payments),
+            new NavLink("Origem Pedido", Icons.Material.Filled.TripOrigin),
+            new NavLink("Motivos Perda Orçamento", Icons.Material.Filled.OfflinePin)
+        }),
+        new NavGroup("Movimentos", Icons.Material.Filled.Moving, new List<NavLink>
+        {
+            new NavLink("Pedidos", Icons.Material.Filled.ShoppingBag, "T:\\TIDSCI\\EXETPS\\PEDVENDA.EXE 00001003"),
+            new NavLink("Tabela de Preços", Icons.Material.Filled.PriceChange, "T:\\TIDSCI\\EXETPS\\TABPRE.EXE 00001003"),
+            new NavLink("Altera Orçamentos no Período", Icons.Material.Filled.ManageHistory)
+        }),
+        new NavGroup("Consultas", Icons.Material.Filled.Search, new List<NavLink>
+        {
+            new NavLink("Preço dos Materiais", Icons.Material.Filled.PriceChange),
+            new NavLink("Estoque/Preço", Icons.Material.Filled.Inventory),
+            new NavLink("Histórico do Material", Icons.Material.Filled.History),
+            new NavLink("Materiais para Chave Externa", Icons.Material.Filled.Key),
+            new NavLink("Pedidos de Venda", Icons.Material.Filled.ScreenSearchDesktop),
+            new NavLink("Material com Leitor de Código de Barras", Icons.Material.Filled.ManageSearch),
+            new NavLink("Posição do Estoque Pedidos em Aberto", Icons.Material.Filled.ControlPoint)
+        }),
+        new NavGroup("Relatórios", Icons.Material.Filled.Description, new List<NavLink>
+        {
+            new NavLink("Pedidos em Aberto", Icons.Material.Filled.RequestPage),
+            new NavLink("Pedidos no Período", Icons.Material.Filled.CalendarToday),
+            new NavLink("Relatórios Específicos", Icons.Material.Filled.Info)
+        })
+    };
+
+    private void Executar(string path)
+    {
+        ApplicationRunner.RunApplication(path);
+    }
+
+    public class NavGroup
+    {
+        public string Title { get; set; }
+        public string Icon { get; set; }
+        public List<NavLink> Links { get; set; }
+
+        public NavGroup(string title, string icon, List<NavLink> links)
+        {
+            Title = title;
+            Icon = icon;
+            Links = links;
+        }
+    }
+
+    public class NavLink
+    {
+        public string DisplayName { get; set; }
+        public string Icon { get; set; }
+        public string Path { get; set; }
+
+        public NavLink(string displayName, string icon, string path = "")
+        {
+            DisplayName = displayName;
+            Icon = icon;
+            Path = path;
+        }
+    }
+}

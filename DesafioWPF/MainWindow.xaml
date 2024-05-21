@@ -6,7 +6,21 @@
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
         xmlns:local="clr-namespace:DesafioWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="" Height="960" Width="1280" WindowState="Maximized" >
+    <Window.Icon>
+        <DrawingImage>
+            <DrawingImage.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,40,40" />
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Brush>
+                        <SolidColorBrush Color="#0DFFFFFF" />
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </Window.Icon>
     <Grid>
         <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{DynamicResource services}">
             <blazor:BlazorWebView.RootComponents>
